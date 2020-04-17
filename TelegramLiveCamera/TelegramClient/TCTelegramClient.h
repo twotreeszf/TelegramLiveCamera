@@ -10,14 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void (^TCBlock)();
-typedef void (^TCFailedBlock)(NSInteger code, NSString* message);
-
 @protocol TCTelegramClientDelegate <NSObject>
 - (void)authNeedPhoneNumber;
 - (void)authNeedCode;
 - (void)authReady;
 - (void)authLoggingOut;
+- (void)getMeUserId:(NSInteger)userId;
 - (void)newMessage:(NSInteger)chatId senderId:(NSInteger)senderId content:(NSString*)content;
 - (void)error:(NSInteger)code msg:(NSString*)msg;
 
@@ -30,10 +28,12 @@ typedef void (^TCFailedBlock)(NSInteger code, NSString* message);
 @property(nonatomic, readonly, assign) NSInteger apiId;
 @property(nonatomic, readonly, strong) NSString* apiHash;
 
++ (BOOL)cleanSession;
+
 - (instancetype)initWithApiId:(NSUInteger)apiId apiHash:(NSString*)apiHash;
 - (void)run;
 - (void)stop;
-- (BOOL)cleanSession;
+
 - (void)setPhoneNumber:(NSString*)phoneNumber success:(TCBlock)success failed:(TCFailedBlock)failed;
 - (void)setCode:(NSString*)code success:(TCBlock)success failed:(TCFailedBlock)failed;
 

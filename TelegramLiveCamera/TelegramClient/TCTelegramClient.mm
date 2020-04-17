@@ -56,7 +56,7 @@ auto overloaded(F... f) {
 
 @implementation TCTelegramClient
 
-- (NSString*)libraryPath {
++ (NSString*)libraryPath {
     NSString *libraryPath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     libraryPath = [libraryPath stringByAppendingPathComponent:@"Telegram"];
     if (![[NSFileManager defaultManager] fileExistsAtPath:libraryPath])
@@ -94,20 +94,17 @@ auto overloaded(F... f) {
     _running = NO;
     
     dispatch_suspend(_timer);
-    _timer = 0;
     
     dispatch_async(_queue, ^{
+        [self _sendQuery:td_api::make_object<td_api::close>() handler:{}];
         self->_currentQueryId = 0;
         self->_handlers.clear();
     });
 }
 
-- (BOOL)cleanSession {
-    if (_running)
-        return NO;
-    
++ (BOOL)cleanSession {
     NSError* err;
-    [[NSFileManager defaultManager] removeItemAtPath:self.libraryPath error:&err];
+    [[NSFileManager defaultManager] removeItemAtPath:TCTelegramClient.libraryPath error:&err];
     return err != nil;
 }
 
@@ -186,7 +183,7 @@ auto overloaded(F... f) {
                 [self _processNewMessage:message];
             },
             [](auto &update){
-                DDLogDebug(@"update: %s", td_api::to_string(update).c_str());
+                // DDLogDebug(@"update: %s", td_api::to_string(update).c_str());
             }));
         }
         else {
@@ -227,6 +224,18 @@ auto overloaded(F... f) {
             if (weakSelf.delegate)
                 [weakSelf.delegate authReady];
         });
+        
+        [weakSelf _sendQuery:td_api::make_object<td_api::getMe>() handler:[weakSelf](td_api::Object& obj){
+            if (![weakSelf _checkError:obj failed:nil]) {
+                if (obj.get_id() == td_api::user::ID) {
+                    auto& user = static_cast<td_api::user&>(obj);
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if (weakSelf.delegate)
+                            [weakSelf.delegate getMeUserId:user.id_];
+                    });
+                }
+            }
+        }];
     },
     [weakSelf](td_api::authorizationStateLoggingOut&){
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -249,7 +258,7 @@ auto overloaded(F... f) {
     [weakSelf](td_api::authorizationStateWaitTdlibParameters&){
         auto parameters = td_api::make_object<td_api::tdlibParameters>();
         parameters->use_test_dc_ = false;
-        parameters->database_directory_ = weakSelf.libraryPath.UTF8String;
+        parameters->database_directory_ = TCTelegramClient.libraryPath.UTF8String;
         parameters->use_file_database_ = true;
         parameters->use_chat_info_database_ = true;
         parameters->use_message_database_ = true;

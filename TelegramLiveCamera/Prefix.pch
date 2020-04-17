@@ -13,4 +13,7 @@
 #import <DDLog.h>
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
+typedef void (^TCBlock)();
+typedef void (^TCFailedBlock)(NSInteger code, NSString* message);
+
 #endif

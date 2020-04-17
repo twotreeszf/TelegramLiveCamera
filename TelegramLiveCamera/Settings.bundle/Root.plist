@@ -84,6 +84,20 @@
 			<key>DefaultValue</key>
 			<string>https://</string>
 		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>账号</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>IASKButtonSpecifier</string>
+			<key>Key</key>
+			<string>CleanAccount</string>
+			<key>Title</key>
+			<string>退出登录</string>
+		</dict>
 	</array>
 </dict>
 </plist>

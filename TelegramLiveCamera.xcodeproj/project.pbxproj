@@ -24,7 +24,6 @@
 		E87292CB24499FB300DEFCBC /* NSMutableArray+LFAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = E872913124499FB200DEFCBC /* NSMutableArray+LFAdd.m */; };
 		E87292CC24499FB300DEFCBC /* LFStreamRtmpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = E872913324499FB200DEFCBC /* LFStreamRtmpSocket.m */; };
 		E87292CD24499FB300DEFCBC /* LFStreamingBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = E872913624499FB200DEFCBC /* LFStreamingBuffer.m */; };
-		E87292CE24499FB300DEFCBC /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = E872913724499FB200DEFCBC /* .gitignore */; };
 		E87292CF24499FB300DEFCBC /* LFGPUImageBeautyFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = E872913A24499FB200DEFCBC /* LFGPUImageBeautyFilter.m */; };
 		E87292D024499FB300DEFCBC /* LFGPUImageEmptyFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = E872913C24499FB200DEFCBC /* LFGPUImageEmptyFilter.m */; };
 		E87292D124499FB300DEFCBC /* LFHardwareAudioEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = E872914024499FB200DEFCBC /* LFHardwareAudioEncoder.m */; };
@@ -34,7 +33,6 @@
 		E87292D524499FB300DEFCBC /* LFVideoEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = E872914724499FB200DEFCBC /* LFVideoEncoder.m */; };
 		E87292D624499FB300DEFCBC /* LFAVEncoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = E872914A24499FB200DEFCBC /* LFAVEncoder.mm */; };
 		E87292D724499FB300DEFCBC /* LFHardwareVideoEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = E872914E24499FB200DEFCBC /* LFHardwareVideoEncoder.m */; };
-		E87292D824499FB300DEFCBC /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = E872915024499FB200DEFCBC /* .travis.yml */; };
 		E87292D924499FB300DEFCBC /* GPUImageColorBurnBlendFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = E872915424499FB200DEFCBC /* GPUImageColorBurnBlendFilter.m */; };
 		E87292DA24499FB300DEFCBC /* GPUImageTwoPassTextureSamplingFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = E872915524499FB200DEFCBC /* GPUImageTwoPassTextureSamplingFilter.m */; };
 		E87292DB24499FB300DEFCBC /* GPUImageUnsharpMaskFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = E872915624499FB200DEFCBC /* GPUImageUnsharpMaskFilter.m */; };
@@ -269,7 +267,6 @@
 		E872913424499FB200DEFCBC /* LFStreamSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFStreamSocket.h; sourceTree = "<group>"; };
 		E872913524499FB200DEFCBC /* NSMutableArray+LFAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+LFAdd.h"; sourceTree = "<group>"; };
 		E872913624499FB200DEFCBC /* LFStreamingBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFStreamingBuffer.m; sourceTree = "<group>"; };
-		E872913724499FB200DEFCBC /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		E872913924499FB200DEFCBC /* LFGPUImageEmptyFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFGPUImageEmptyFilter.h; sourceTree = "<group>"; };
 		E872913A24499FB200DEFCBC /* LFGPUImageBeautyFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFGPUImageBeautyFilter.m; sourceTree = "<group>"; };
 		E872913B24499FB200DEFCBC /* LFGPUImageBeautyFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFGPUImageBeautyFilter.h; sourceTree = "<group>"; };
@@ -291,7 +288,6 @@
 		E872914D24499FB200DEFCBC /* LFHardwareAudioEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFHardwareAudioEncoder.h; sourceTree = "<group>"; };
 		E872914E24499FB200DEFCBC /* LFHardwareVideoEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFHardwareVideoEncoder.m; sourceTree = "<group>"; };
 		E872914F24499FB200DEFCBC /* LFLiveSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFLiveSession.h; sourceTree = "<group>"; };
-		E872915024499FB200DEFCBC /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .travis.yml; sourceTree = "<group>"; };
 		E872915324499FB200DEFCBC /* GPUImageBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPUImageBuffer.h; sourceTree = "<group>"; };
 		E872915424499FB200DEFCBC /* GPUImageColorBurnBlendFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPUImageColorBurnBlendFilter.m; sourceTree = "<group>"; };
 		E872915524499FB200DEFCBC /* GPUImageTwoPassTextureSamplingFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPUImageTwoPassTextureSamplingFilter.m; sourceTree = "<group>"; };
@@ -765,17 +761,15 @@
 		E872911724499FB200DEFCBC /* LFLiveKit */ = {
 			isa = PBXGroup;
 			children = (
+				E872912224499FB200DEFCBC /* LFLiveKit.h */,
+				E872914F24499FB200DEFCBC /* LFLiveSession.h */,
+				E872912E24499FB200DEFCBC /* LFLiveSession.m */,
 				E872911824499FB200DEFCBC /* configuration */,
 				E872911D24499FB200DEFCBC /* capture */,
-				E872912224499FB200DEFCBC /* LFLiveKit.h */,
 				E872912324499FB200DEFCBC /* objects */,
-				E872912E24499FB200DEFCBC /* LFLiveSession.m */,
 				E872912F24499FB200DEFCBC /* publish */,
-				E872913724499FB200DEFCBC /* .gitignore */,
 				E872913824499FB200DEFCBC /* filter */,
 				E872913D24499FB200DEFCBC /* coder */,
-				E872914F24499FB200DEFCBC /* LFLiveSession.h */,
-				E872915024499FB200DEFCBC /* .travis.yml */,
 				E872915124499FB200DEFCBC /* Vendor */,
 			);
 			path = LFLiveKit;
@@ -1427,8 +1421,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E87292D824499FB300DEFCBC /* .travis.yml in Resources */,
-				E87292CE24499FB300DEFCBC /* .gitignore in Resources */,
 				E8AC68702446E8AB00ACEF40 /* LaunchScreen.storyboard in Resources */,
 				E872910F24498F2F00DEFCBC /* Settings.bundle in Resources */,
 				E8AC686D2446E8AB00ACEF40 /* Assets.xcassets in Resources */,

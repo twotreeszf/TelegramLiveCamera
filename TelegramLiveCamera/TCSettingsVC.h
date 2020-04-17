@@ -11,7 +11,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TCSettingsVC : IASKAppSettingsViewController
+@interface TCSettingsVC : IASKAppSettingsViewController <IASKSettingsDelegate>
+
+@property(nonatomic, readwrite, strong) TCBlock cleanAccount;
 
 @end
 

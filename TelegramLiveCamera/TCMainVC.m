@@ -18,6 +18,8 @@
 @property(nonatomic, readwrite, strong) LFLiveSession* liveSession;
 @property(nonatomic, readwrite, strong) TCTelegramClient* telegram;
 @property(nonatomic, readwrite, assign) BOOL running;
+@property(nonatomic, readwrite, assign) NSInteger keyChatId;
+@property(nonatomic, readwrite, assign) NSInteger meUserId;
 
 @end
 
@@ -30,6 +32,8 @@
     
     [DDLog addLogger:[UIForLumberjack sharedInstance]];
     [[UIForLumberjack sharedInstance] showLogInView:self.view];
+    
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
     
     UIBarButtonItem* runButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"run"] style:UIBarButtonItemStylePlain target:self action:@selector(_onRun)];
     self.navigationItem.leftBarButtonItem = runButton;
@@ -65,6 +69,11 @@
 }
 - (void)_onConfig {
     TCSettingsVC* settingsVC = [TCSettingsVC new];
+    settingsVC.cleanAccount = ^ {
+        [self _stopLive];
+        [self _stopTelegram];
+        [TCTelegramClient cleanSession];
+    };
     [self.navigationController pushViewController:settingsVC animated:YES];
 }
 
@@ -141,35 +150,22 @@
 }
 
 - (void)liveSession:(nullable LFLiveSession *)session liveStateDidChange:(LFLiveState)state {
-    switch (state) {
-        case LFLiveReady:
-            DDLogInfo(@"[推流] 状态:%ld, Ready", state);
-            break;
+    NSString* status = [self _liveStatus2Msg:state];
+    if (status.length) {
+        DDLogDebug(status);
+        if (_keyChatId) {
+            [ _telegram sendMessage:_keyChatId message:status success:^{
+                DDLogDebug(@"[telegram] 回复消息成功, %@", status);
+            }];
             
-        case LFLivePending:
-            DDLogInfo(@"[推流] 状态:%ld, Pending", state);
-            break;
-            
-        case LFLiveStart:
-            DDLogInfo(@"[推流] 状态:%ld, Start", state);
-            break;
-            
-        case LFLiveStop:
-            DDLogInfo(@"[推流] 状态:%ld, Stop", state);
-            break;
-            
-        case LFLiveError:
-            DDLogInfo(@"[推流] 状态:%ld, Error", state);
-            break;
-            
-        case LFLiveRefresh:
-            DDLogInfo(@"[推流] 状态:%ld, Refresh", state);
-            break;
-            
-        default:
-            break;
+            if (LFLiveStart == state) {
+                NSString* replay = [NSString stringWithFormat:@"正在直播，点击观看: %@", TCPreferences.sharedInstance.liveViewUrl];
+                [ _telegram sendMessage:_keyChatId message:replay success:^{
+                    DDLogDebug(@"[telegram] 回复消息成功, %@", replay);
+                }];
+            }
+        }
     }
-    
 }
 
 - (void)liveSession:(nullable LFLiveSession *)session debugInfo:(nullable LFLiveDebug *)debugInfo {
@@ -177,29 +173,74 @@
 }
 
 - (void)liveSession:(nullable LFLiveSession *)session errorCode:(LFLiveSocketErrorCode)errorCode {
+    NSString* errorMsg;
     switch (errorCode) {
         case LFLiveSocketError_PreView:
-            DDLogError(@"[推流]错误:%ld, Preview failed", errorCode);
+            errorMsg = [NSString stringWithFormat:@"[推流] 错误:%ld, Preview failed", errorCode];
             break;
             
         case LFLiveSocketError_GetStreamInfo:
-            DDLogError(@"[推流]错误:%ld, Get stream info failed", errorCode);
+            errorMsg = [NSString stringWithFormat:@"[推流] 错误:%ld, Get stream info failed", errorCode];
             break;
         case LFLiveSocketError_ConnectSocket:
-            DDLogError(@"[推流]错误:%ld, Connect socket failed", errorCode);
+            errorMsg = [NSString stringWithFormat:@"[推流] 错误:%ld, Connect socket failed", errorCode];
             break;
             
         case LFLiveSocketError_Verification:
-            DDLogError(@"[推流]错误:%ld, Verification failed", errorCode);
+            errorMsg = [NSString stringWithFormat:@"[推流] 错误:%ld, Verification failed", errorCode];
             break;
         
         case LFLiveSocketError_ReConnectTimeOut:
-            DDLogError(@"[推流]错误:%ld, Reconnect timeout", errorCode);
+            errorMsg = [NSString stringWithFormat:@"[推流] 错误:%ld, Reconnect timeout", errorCode];
             break;
             
         default:
             break;
     }
+    
+    if (errorMsg.length) {
+        DDLogError(errorMsg);
+        
+        if (_keyChatId) {
+            [ _telegram sendMessage:_keyChatId message:errorMsg success:^{
+                DDLogDebug(@"[telegram] 回复消息成功, %@", errorMsg);
+            }];
+        }
+    }
+}
+
+- (NSString*)_liveStatus2Msg:(LFLiveState)state {
+    NSString* status;
+    switch (state) {
+        case LFLiveReady:
+            status = [NSString stringWithFormat:@"[推流] 状态:%ld, Ready", state];
+            break;
+            
+        case LFLivePending:
+            status = [NSString stringWithFormat:@"[推流] 状态:%ld, Pending", state];
+            break;
+            
+        case LFLiveStart:
+            status = [NSString stringWithFormat:@"[推流] 状态:%ld, Start", state];
+            break;
+            
+        case LFLiveStop:
+            status = [NSString stringWithFormat:@"[推流] 状态:%ld, Stop", state];
+            break;
+            
+        case LFLiveError:
+            status = [NSString stringWithFormat:@"[推流] 状态:%ld, Error", state];
+            break;
+            
+        case LFLiveRefresh:
+            status = [NSString stringWithFormat:@"[推流] 状态:%ld, Refresh", state];
+            break;
+            
+        default:
+            break;
+    }
+    
+    return status;
 }
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -214,6 +255,8 @@
 
 - (void)_stopTelegram {
     _telegram.delegate = nil;
+    _meUserId = 0;
+    _keyChatId = 0;
     [_telegram stop];
     _telegram = nil;
 }
@@ -229,9 +272,9 @@
 
 - (void)authNeedCode {
     __weak typeof(self) weakSelf = self;
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Verify Code:" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"验证码" message:@"请输入来自 Telegram app 的验证码：" preferredStyle:UIAlertControllerStyleAlert];
     [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-        textField.placeholder = @"Verify Code";
+        textField.placeholder = @"code";
     }];
     UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         NSString* code =[[alertController textFields][0] text];
@@ -253,12 +296,60 @@
     DDLogInfo(@"[Telegram] 登录成功");
 }
 
+- (void)getMeUserId:(NSInteger)userId {
+    _meUserId = userId;
+    DDLogInfo(@"[Telegram] 获取 uid 成功");
+}
+
 - (void)authLoggingOut {
     DDLogInfo(@"[Telegram] 登出成功");
 }
 
 - (void)newMessage:(NSInteger)chatId senderId:(NSInteger)senderId content:(NSString*)content {
     DDLogInfo(@"[Telegram] 新消息, chatId:%ld, sendId:%ld, msg:%@", chatId, senderId, content);
+    
+    if (senderId == _meUserId)
+        return;
+    
+    NSString* replay;
+    if ([content isEqualToString:@"help"]) {
+        replay =
+        @"使用帮助:\n\
+        [暗号] ->对接暗号\n\
+        query ->查询当前状态\n\
+        start ->开始直播推流\n\
+        stop ->停止直播推流\n";
+    }
+    else if ([content isEqualToString:TCPreferences.sharedInstance.telegramMessageTag]){
+        _keyChatId = chatId;
+        replay = @"暗号对接成功!";
+    }
+    else if (_keyChatId == chatId)
+    {
+        NSString* command = content;
+        if ([command isEqualToString:@"query"]) {
+            if (LFLiveStart == _liveSession.state) {
+                replay = [NSString stringWithFormat:@"正在直播，点击观看: %@", TCPreferences.sharedInstance.liveViewUrl];
+            }
+            else
+                replay = [self _liveStatus2Msg:_liveSession.state];
+        }
+        else if ([command isEqualToString:@"start"]) {
+            replay = @"收到，开始直播";
+            [self _stopLive];
+            [self _startLive];
+        }
+        else if ([command isEqualToString:@"stop"]) {
+            replay = @"收到，停止直播";
+            [self _stopLive];
+        }
+    }
+    
+    if (replay.length) {
+        [_telegram sendMessage:chatId message:replay success:^{
+            DDLogDebug(@"[telegram] 回复消息成功, %@", replay);
+        }];
+    }
 }
 
 - (void)error:(NSInteger)code msg:(NSString*)msg {
