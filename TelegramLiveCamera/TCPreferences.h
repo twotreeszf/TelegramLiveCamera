@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, readwrite, assign) NSString* liveRtmpUrl;
 @property(nonatomic, readwrite, assign) NSString* liveViewUrl;
 
+@property(nonatomic, readonly, assign) BOOL ready;
+
 
 @end
 

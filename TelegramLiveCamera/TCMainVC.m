@@ -7,7 +7,7 @@
 //
 
 #import "TCMainVC.h"
-#import <UIForLumberjack.h>
+#import "UIForLumberjack/UIForLumberjack.h"
 #import "LFLiveKit.h"
 #import "TelegramClient/TCTelegramClient.h"
 #import "TCPreferences.h"
@@ -17,6 +17,7 @@
 
 @property(nonatomic, readwrite, strong) LFLiveSession* liveSession;
 @property(nonatomic, readwrite, strong) TCTelegramClient* telegram;
+@property(nonatomic, readwrite, assign) BOOL running;
 
 @end
 
@@ -38,7 +39,29 @@
 }
 
 - (void)_onRun {
+    if (!TCPreferences.sharedInstance.ready) {
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"配置错误" message:@"配置未完成，去设置页面看看" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self _onConfig];
+        }];
+        [alert addAction:confirmAction];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
     
+    if (!_running) {
+        [self _startTelegram];
+        
+        _running = YES;
+        self.navigationItem.leftBarButtonItem.image = [UIImage imageNamed:@"pause"];
+    }
+    else {
+        [self _stopTelegram];
+        [self _stopLive];
+        
+        _running = NO;
+        self.navigationItem.leftBarButtonItem.image = [UIImage imageNamed:@"run"];
+    }
 }
 - (void)_onConfig {
     TCSettingsVC* settingsVC = [TCSettingsVC new];
@@ -181,7 +204,7 @@
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-- (void)_runTelegram {
+- (void)_startTelegram {
     NSInteger apiId = TCPreferences.sharedInstance.telegramApiId;
     NSString* apiHash = TCPreferences.sharedInstance.telegramApiHash;
     _telegram = [[TCTelegramClient alloc] initWithApiId:apiId apiHash:apiHash];

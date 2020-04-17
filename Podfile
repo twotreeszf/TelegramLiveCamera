@@ -6,8 +6,7 @@ target 'TelegramLiveCamera' do
   # use_frameworks!
 
   # Pods for TelegramLiveCamera
-  pod 'UIForLumberjack'
-  pod 'Masonry'
+  pod 'CocoaLumberjack'
   pod 'PAPreferences'
   pod 'InAppSettingsKit'
 

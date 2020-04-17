@@ -17,4 +17,14 @@
 @dynamic liveRtmpUrl;
 @dynamic liveViewUrl;
 
+- (BOOL)ready {
+    return
+    self.telegramApiId &&
+    self.telegramApiHash.length &&
+    self.telegramPhoneNumber.length &&
+    self.telegramMessageTag.length &&
+    self.liveRtmpUrl.length &&
+    self.liveViewUrl.length;
+}
+
 @end
