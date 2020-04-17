@@ -33,6 +33,7 @@ typedef void (^TCFailedBlock)(NSInteger code, NSString* message);
 - (instancetype)initWithApiId:(NSUInteger)apiId apiHash:(NSString*)apiHash;
 - (void)run;
 - (void)stop;
+- (BOOL)cleanSession;
 - (void)setPhoneNumber:(NSString*)phoneNumber success:(TCBlock)success failed:(TCFailedBlock)failed;
 - (void)setCode:(NSString*)code success:(TCBlock)success failed:(TCFailedBlock)failed;
 

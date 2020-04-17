@@ -8,8 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		4485788121D1B3F05F6AA74C /* libPods-TelegramLiveCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F01DC688CAB397D35F3A8A77 /* libPods-TelegramLiveCamera.a */; };
+		E872910F24498F2F00DEFCBC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E872910E24498F2F00DEFCBC /* Settings.bundle */; };
+		E87291122449917000DEFCBC /* TCSettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E87291112449917000DEFCBC /* TCSettingsVC.m */; };
 		E8AC68622446E8A800ACEF40 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E8AC68612446E8A800ACEF40 /* AppDelegate.m */; };
-		E8AC68682446E8A800ACEF40 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8AC68672446E8A800ACEF40 /* ViewController.m */; };
+		E8AC68682446E8A800ACEF40 /* TCMainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E8AC68672446E8A800ACEF40 /* TCMainVC.m */; };
 		E8AC686D2446E8AB00ACEF40 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8AC686C2446E8AB00ACEF40 /* Assets.xcassets */; };
 		E8AC68702446E8AB00ACEF40 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8AC686E2446E8AB00ACEF40 /* LaunchScreen.storyboard */; };
 		E8AC68732446E8AB00ACEF40 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E8AC68722446E8AB00ACEF40 /* main.m */; };
@@ -226,16 +228,20 @@
 		E8AC6B162448537E00ACEF40 /* libtdactor.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8AC6AED24472A5600ACEF40 /* libtdactor.a */; };
 		E8AC6B192448537E00ACEF40 /* libtdcore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8AC6B172448537E00ACEF40 /* libtdcore.a */; };
 		E8AC6B1A2448537E00ACEF40 /* libtdapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8AC6B182448537E00ACEF40 /* libtdapi.a */; };
+		E8AC6B1D24496DD100ACEF40 /* TCPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = E8AC6B1C24496DD100ACEF40 /* TCPreferences.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		8E95FE2F284565FB99DD6F74 /* Pods-TelegramLiveCamera.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TelegramLiveCamera.release.xcconfig"; path = "Pods/Target Support Files/Pods-TelegramLiveCamera/Pods-TelegramLiveCamera.release.xcconfig"; sourceTree = "<group>"; };
 		ACDDEA04483C0FC55D519D00 /* Pods-TelegramLiveCamera.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TelegramLiveCamera.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TelegramLiveCamera/Pods-TelegramLiveCamera.debug.xcconfig"; sourceTree = "<group>"; };
+		E872910E24498F2F00DEFCBC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		E87291102449917000DEFCBC /* TCSettingsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TCSettingsVC.h; sourceTree = "<group>"; };
+		E87291112449917000DEFCBC /* TCSettingsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TCSettingsVC.m; sourceTree = "<group>"; };
 		E8AC685D2446E8A800ACEF40 /* TeleCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeleCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8AC68602446E8A800ACEF40 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E8AC68612446E8A800ACEF40 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		E8AC68662446E8A800ACEF40 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		E8AC68672446E8A800ACEF40 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		E8AC68662446E8A800ACEF40 /* TCMainVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TCMainVC.h; sourceTree = "<group>"; };
+		E8AC68672446E8A800ACEF40 /* TCMainVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TCMainVC.m; sourceTree = "<group>"; };
 		E8AC686C2446E8AB00ACEF40 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E8AC686F2446E8AB00ACEF40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E8AC68712446E8AB00ACEF40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -673,6 +679,8 @@
 		E8AC6B0B24480E3100ACEF40 /* TCTelegramClient.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TCTelegramClient.mm; sourceTree = "<group>"; };
 		E8AC6B172448537E00ACEF40 /* libtdcore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtdcore.a; path = lib/libtdcore.a; sourceTree = "<group>"; };
 		E8AC6B182448537E00ACEF40 /* libtdapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtdapi.a; path = lib/libtdapi.a; sourceTree = "<group>"; };
+		E8AC6B1B24496DD100ACEF40 /* TCPreferences.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TCPreferences.h; sourceTree = "<group>"; };
+		E8AC6B1C24496DD100ACEF40 /* TCPreferences.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TCPreferences.m; sourceTree = "<group>"; };
 		F01DC688CAB397D35F3A8A77 /* libPods-TelegramLiveCamera.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TelegramLiveCamera.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -755,13 +763,18 @@
 				E8AC6B0924480DAF00ACEF40 /* TelegramClient */,
 				E8AC68602446E8A800ACEF40 /* AppDelegate.h */,
 				E8AC68612446E8A800ACEF40 /* AppDelegate.m */,
-				E8AC68662446E8A800ACEF40 /* ViewController.h */,
-				E8AC68672446E8A800ACEF40 /* ViewController.m */,
+				E8AC68662446E8A800ACEF40 /* TCMainVC.h */,
+				E8AC68672446E8A800ACEF40 /* TCMainVC.m */,
+				E87291102449917000DEFCBC /* TCSettingsVC.h */,
+				E87291112449917000DEFCBC /* TCSettingsVC.m */,
 				E8AC686C2446E8AB00ACEF40 /* Assets.xcassets */,
 				E8AC686E2446E8AB00ACEF40 /* LaunchScreen.storyboard */,
 				E8AC68712446E8AB00ACEF40 /* Info.plist */,
 				E8AC68722446E8AB00ACEF40 /* main.m */,
 				E8AC68792446F62100ACEF40 /* Prefix.pch */,
+				E8AC6B1B24496DD100ACEF40 /* TCPreferences.h */,
+				E8AC6B1C24496DD100ACEF40 /* TCPreferences.m */,
+				E872910E24498F2F00DEFCBC /* Settings.bundle */,
 			);
 			path = TelegramLiveCamera;
 			sourceTree = "<group>";
@@ -1389,6 +1402,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8AC68702446E8AB00ACEF40 /* LaunchScreen.storyboard in Resources */,
+				E872910F24498F2F00DEFCBC /* Settings.bundle in Resources */,
 				E8AC686D2446E8AB00ACEF40 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1426,11 +1440,14 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-TelegramLiveCamera/Pods-TelegramLiveCamera-resources.sh",
+				$PODS_CONFIGURATION_BUILD_DIR/InAppSettingsKit/InAppSettingsKit.bundle,
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1509,6 +1526,7 @@
 				E8AC6AA42446F8F500ACEF40 /* GPUImageColorConversion.m in Sources */,
 				E8AC6A622446F8F500ACEF40 /* GPUImageGammaFilter.m in Sources */,
 				E8AC6A3E2446F8F500ACEF40 /* GPUImageFourInputFilter.m in Sources */,
+				E8AC6B1D24496DD100ACEF40 /* TCPreferences.m in Sources */,
 				E8AC6A322446F8F500ACEF40 /* LFMP4Atom.m in Sources */,
 				E8AC6A822446F8F500ACEF40 /* GPUImageOutput.m in Sources */,
 				E8AC6A352446F8F500ACEF40 /* LFAVEncoder.mm in Sources */,
@@ -1524,6 +1542,7 @@
 				E8AC6A952446F8F500ACEF40 /* GPUImageView.m in Sources */,
 				E8AC6AE02446F8F500ACEF40 /* GPUImageLightenBlendFilter.m in Sources */,
 				E8AC6A962446F8F500ACEF40 /* GPUImageSaturationBlendFilter.m in Sources */,
+				E87291122449917000DEFCBC /* TCSettingsVC.m in Sources */,
 				E8AC6A722446F8F500ACEF40 /* GPUImageDissolveBlendFilter.m in Sources */,
 				E8AC6A512446F8F500ACEF40 /* GPUImageSolarizeFilter.m in Sources */,
 				E8AC6AC22446F8F500ACEF40 /* GPUImageGlassSphereFilter.m in Sources */,
@@ -1542,7 +1561,7 @@
 				E8AC6A242446F8F500ACEF40 /* LFAudioCapture.m in Sources */,
 				E8AC6A2E2446F8F500ACEF40 /* LFGPUImageBeautyFilter.m in Sources */,
 				E8AC6A892446F8F500ACEF40 /* GPUImageColorDodgeBlendFilter.m in Sources */,
-				E8AC68682446E8A800ACEF40 /* ViewController.m in Sources */,
+				E8AC68682446E8A800ACEF40 /* TCMainVC.m in Sources */,
 				E8AC6AB52446F8F500ACEF40 /* GPUImageRGBErosionFilter.m in Sources */,
 				E8AC6AD72446F8F500ACEF40 /* GPUImageChromaKeyBlendFilter.m in Sources */,
 				E8AC6A4D2446F8F500ACEF40 /* GPUImageGrayscaleFilter.m in Sources */,

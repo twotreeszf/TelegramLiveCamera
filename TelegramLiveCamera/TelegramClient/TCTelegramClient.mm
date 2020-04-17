@@ -50,11 +50,19 @@ auto overloaded(F... f) {
     std::map<std::uint64_t, std::function<void(td_api::Object&)>> _handlers;
 }
 @property(nonatomic, readwrite, strong) dispatch_queue_t queue;
+@property(nonatomic, readonly, strong) NSString* libraryPath;
+
 @end
 
-
-
 @implementation TCTelegramClient
+
+- (NSString*)libraryPath {
+    NSString *libraryPath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    libraryPath = [libraryPath stringByAppendingPathComponent:@"Telegram"];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:libraryPath])
+        [[NSFileManager defaultManager] createDirectoryAtPath:libraryPath withIntermediateDirectories:NO attributes:nil error:nil];
+    return libraryPath;
+}
 
 - (instancetype)initWithApiId:(NSUInteger)apiId apiHash:(NSString *)apiHash {
     self = [super init];
@@ -94,6 +102,15 @@ auto overloaded(F... f) {
     });
 }
 
+- (BOOL)cleanSession {
+    if (_running)
+        return NO;
+    
+    NSError* err;
+    [[NSFileManager defaultManager] removeItemAtPath:self.libraryPath error:&err];
+    return err != nil;
+}
+
 - (void)setPhoneNumber:(NSString*)phoneNumber success:(TCBlock)success failed:(TCFailedBlock)failed {
     __weak typeof(self) weakSelf = self;
     dispatch_async(weakSelf.queue, ^{
@@ -103,7 +120,7 @@ auto overloaded(F... f) {
                 failed(code, message);
             }];
             if (ok) {
-                DDLogInfo(@"send phone number success");
+                DDLogInfo(@"[Telegram] 手机号设置成功");
                 success();
             }
         }];
@@ -118,7 +135,7 @@ auto overloaded(F... f) {
                 failed(code, message);
             }];
             if (ok) {
-                DDLogInfo(@"send code success");
+                DDLogInfo(@"[Telegram] 验证码发送成功");
                 success();
             }
         }];
@@ -130,7 +147,7 @@ auto overloaded(F... f) {
     dispatch_async(_queue, ^{
         [weakSelf _sendQuery:td_api::make_object<td_api::logOut>() handler:[weakSelf](td_api::Object& obj) {
             if (![weakSelf _checkError:obj failed:nil])
-                DDLogInfo(@"log out success");
+                DDLogInfo(@"[Telegram] 登出成功");
         }];
     });
 }
@@ -232,13 +249,7 @@ auto overloaded(F... f) {
     [weakSelf](td_api::authorizationStateWaitTdlibParameters&){
         auto parameters = td_api::make_object<td_api::tdlibParameters>();
         parameters->use_test_dc_ = false;
-        
-        NSString *libraryPath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        libraryPath = [libraryPath stringByAppendingPathComponent:@"Telegram"];
-        if (![[NSFileManager defaultManager] fileExistsAtPath:libraryPath])
-            [[NSFileManager defaultManager] createDirectoryAtPath:libraryPath withIntermediateDirectories:NO attributes:nil error:nil];
-        parameters->database_directory_ = libraryPath.UTF8String;
-        
+        parameters->database_directory_ = weakSelf.libraryPath.UTF8String;
         parameters->use_file_database_ = true;
         parameters->use_chat_info_database_ = true;
         parameters->use_message_database_ = true;
@@ -254,14 +265,14 @@ auto overloaded(F... f) {
         
         [weakSelf _sendQuery:td_api::make_object<td_api::setTdlibParameters>(std::move(parameters)) handler:[weakSelf](td_api::Object& obj) {
             if (![weakSelf _checkError:obj failed:nil]) {
-                DDLogInfo(@"setTdlibParameters success");
+                DDLogInfo(@"[Telegram] 参数设置成功");
             }
         }];
     },
     [weakSelf](td_api::authorizationStateWaitEncryptionKey&){
         [weakSelf _sendQuery:td_api::make_object<td_api::checkDatabaseEncryptionKey>("twotrees") handler:[weakSelf](td_api::Object& obj) {
             if (![weakSelf _checkError:obj failed:nil]) {
-                DDLogInfo(@"set encrypt key success");
+                DDLogInfo(@"[Telegram] 通信秘钥设置成功");
             }
         }];
     },
@@ -280,7 +291,7 @@ auto overloaded(F... f) {
 - (BOOL)_checkError:(td_api::Object&)obj failed:(TCFailedBlock)failed{
     if (obj.get_id() == td_api::error::ID) {
         auto& error = static_cast<td_api::error&>(obj);
-        DDLogError(@"error, code:%d message:%s", error.code_, error.message_.c_str());
+        DDLogError(@"Telegram 错误, code:%d message:%s", error.code_, error.message_.c_str());
         
         __weak typeof(self) weakSelf = self;
         dispatch_async(dispatch_get_main_queue(), ^{

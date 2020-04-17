@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  TCMainVC.h
 //  TelegramLiveCamera
 //
 //  Created by fanzhang on 2020年4月15日  16周Wednesday.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface TCMainVC : UIViewController
 
 
 @end

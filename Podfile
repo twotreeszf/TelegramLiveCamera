@@ -8,5 +8,7 @@ target 'TelegramLiveCamera' do
   # Pods for TelegramLiveCamera
   pod 'UIForLumberjack'
   pod 'Masonry'
+  pod 'PAPreferences'
+  pod 'InAppSettingsKit'
 
 end

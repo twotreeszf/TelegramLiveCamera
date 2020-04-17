@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "EC5A35E482A27F5A8CBD4ED8C2B86524"
+               BlueprintIdentifier = "3D77F2B29FFB63668438D73F15664227"
                BuildableName = "libPods-TelegramLiveCamera.a"
                BlueprintName = "Pods-TelegramLiveCamera"
                ReferencedContainer = "container:Pods.xcodeproj">
