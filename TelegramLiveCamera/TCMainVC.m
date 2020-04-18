@@ -12,6 +12,7 @@
 #import "TelegramClient/TCTelegramClient.h"
 #import "TCPreferences.h"
 #import "TCSettingsVC.h"
+#import "HLDevice/HLDevice.h"
 
 @interface TCMainVC () <LFLiveSessionDelegate, TCTelegramClientDelegate>
 
@@ -78,8 +79,17 @@
 }
 
 - (void)_startLive {
-    LFLiveAudioConfiguration* audio = [LFLiveAudioConfiguration defaultConfigurationForQuality:LFLiveAudioQuality_VeryHigh];
-    LFLiveVideoConfiguration* video = [LFLiveVideoConfiguration defaultConfigurationForQuality:LFLiveVideoQuality_High4 outputImageOrientation:UIInterfaceOrientationLandscapeRight];
+    LFLiveAudioConfiguration* audio;
+    LFLiveVideoConfiguration* video;
+    if (HLDevice.currentDevice.deviceModel > HLDeviceModeliPhone6) {
+        audio = [LFLiveAudioConfiguration defaultConfigurationForQuality:LFLiveAudioQuality_VeryHigh];
+        video = [LFLiveVideoConfiguration defaultConfigurationForQuality:LFLiveVideoQuality_High4 outputImageOrientation:UIInterfaceOrientationLandscapeRight];
+    }
+    else {
+        audio = [LFLiveAudioConfiguration defaultConfigurationForQuality:LFLiveAudioQuality_Medium];
+        video = [LFLiveVideoConfiguration defaultConfigurationForQuality:LFLiveVideoQuality_High3 outputImageOrientation:UIInterfaceOrientationLandscapeRight];
+    }
+    
     
     _liveSession = [[LFLiveSession alloc] initWithAudioConfiguration:audio videoConfiguration:video];
     _liveSession.captureDevicePosition = AVCaptureDevicePositionBack;

@@ -9,5 +9,6 @@ target 'TelegramLiveCamera' do
   pod 'CocoaLumberjack'
   pod 'PAPreferences'
   pod 'InAppSettingsKit'
+  pod 'HLDevice'
 
 end
