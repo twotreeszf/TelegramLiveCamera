@@ -381,10 +381,8 @@
                 replay = @"正在直播，请先停止直播后再试";
             }
             else {
-                if (weakSelf.photoSession.isRunning) {
-                    replay = @"稍等，正在拍照";
-                }
-                else {
+                replay = @"稍等，正在拍照";
+                if (!weakSelf.photoSession.isRunning) {
                     [self _takePhoto];
                 }
             }

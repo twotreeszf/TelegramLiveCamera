@@ -86,19 +86,18 @@ auto overloaded(F... f) {
     });
 
     dispatch_resume(_timer);
-    
     _running = YES;
 }
 
 - (void)stop {
     _running = NO;
-    
-    dispatch_suspend(_timer);
+    dispatch_source_cancel(_timer);
     
     dispatch_async(_queue, ^{
         [self _sendQuery:td_api::make_object<td_api::close>() handler:{}];
         self->_currentQueryId = 0;
         self->_handlers.clear();
+        self->_timer = nil;
     });
 }
 
