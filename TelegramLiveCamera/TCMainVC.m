@@ -426,7 +426,11 @@
     }
         
     [_photoSession startRunning];
-    [imageOutput capturePhotoWithSettings:outputSettings delegate:self];
+    
+    // 等待测光和对焦完成
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [imageOutput capturePhotoWithSettings:outputSettings delegate:self];
+    });
 }
 
 - (void)captureOutput:(AVCapturePhotoOutput *)captureOutput
