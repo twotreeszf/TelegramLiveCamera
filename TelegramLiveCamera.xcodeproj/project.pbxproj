@@ -779,9 +779,9 @@
 			isa = PBXGroup;
 			children = (
 				E872911924499FB200DEFCBC /* LFLiveAudioConfiguration.h */,
-				E872911A24499FB200DEFCBC /* LFLiveVideoConfiguration.m */,
 				E872911B24499FB200DEFCBC /* LFLiveAudioConfiguration.m */,
 				E872911C24499FB200DEFCBC /* LFLiveVideoConfiguration.h */,
+				E872911A24499FB200DEFCBC /* LFLiveVideoConfiguration.m */,
 			);
 			path = configuration;
 			sourceTree = "<group>";

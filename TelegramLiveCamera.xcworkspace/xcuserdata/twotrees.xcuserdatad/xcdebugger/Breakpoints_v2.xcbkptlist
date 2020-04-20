@@ -128,7 +128,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "289"
                   endingLineNumber = "289"
-                  offsetFromSymbolStart = "64">
+                  offsetFromSymbolStart = "20">
                </Location>
                <Location
                   uuid = "E38E4D3C-8657-49CB-BD1B-A9924ACE5B20 - d48a940bfda6a0f7"
@@ -143,7 +143,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "289"
                   endingLineNumber = "289"
-                  offsetFromSymbolStart = "64">
+                  offsetFromSymbolStart = "20">
                </Location>
                <Location
                   uuid = "E38E4D3C-8657-49CB-BD1B-A9924ACE5B20 - 69df514282ca927"
@@ -158,7 +158,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "289"
                   endingLineNumber = "289"
-                  offsetFromSymbolStart = "64">
+                  offsetFromSymbolStart = "20">
                </Location>
                <Location
                   uuid = "E38E4D3C-8657-49CB-BD1B-A9924ACE5B20 - 6fb5c8852d5c695b"
@@ -173,7 +173,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "289"
                   endingLineNumber = "289"
-                  offsetFromSymbolStart = "64">
+                  offsetFromSymbolStart = "20">
                </Location>
                <Location
                   uuid = "E38E4D3C-8657-49CB-BD1B-A9924ACE5B20 - 827a2e8ea012e649"
@@ -188,7 +188,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "289"
                   endingLineNumber = "289"
-                  offsetFromSymbolStart = "64">
+                  offsetFromSymbolStart = "20">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -269,7 +269,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "130"
                   endingLineNumber = "130"
-                  offsetFromSymbolStart = "50">
+                  offsetFromSymbolStart = "40">
                </Location>
                <Location
                   uuid = "6D19865E-37D9-40C0-B9C0-ABDFB6DED246 - d362bdf015a33bdf"
@@ -284,7 +284,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "130"
                   endingLineNumber = "130"
-                  offsetFromSymbolStart = "10">
+                  offsetFromSymbolStart = "20">
                </Location>
                <Location
                   uuid = "6D19865E-37D9-40C0-B9C0-ABDFB6DED246 - 82d10d3dbb24cc07"
@@ -299,7 +299,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "130"
                   endingLineNumber = "130"
-                  offsetFromSymbolStart = "12">
+                  offsetFromSymbolStart = "24">
                </Location>
                <Location
                   uuid = "6D19865E-37D9-40C0-B9C0-ABDFB6DED246 - 82d10d3dbb24cc07"
@@ -314,7 +314,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "130"
                   endingLineNumber = "130"
-                  offsetFromSymbolStart = "12">
+                  offsetFromSymbolStart = "24">
                </Location>
                <Location
                   uuid = "6D19865E-37D9-40C0-B9C0-ABDFB6DED246 - ede26803ee64efd"
@@ -329,7 +329,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "130"
                   endingLineNumber = "130"
-                  offsetFromSymbolStart = "12">
+                  offsetFromSymbolStart = "24">
                </Location>
                <Location
                   uuid = "6D19865E-37D9-40C0-B9C0-ABDFB6DED246 - ede26803ee64efd"
@@ -344,7 +344,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "130"
                   endingLineNumber = "130"
-                  offsetFromSymbolStart = "12">
+                  offsetFromSymbolStart = "24">
                </Location>
                <Location
                   uuid = "6D19865E-37D9-40C0-B9C0-ABDFB6DED246 - 6197521f746b3fef"
@@ -359,7 +359,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "131"
                   endingLineNumber = "131"
-                  offsetFromSymbolStart = "36">
+                  offsetFromSymbolStart = "32">
                </Location>
                <Location
                   uuid = "6D19865E-37D9-40C0-B9C0-ABDFB6DED246 - d362bdf015a33bdf"
@@ -374,7 +374,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "130"
                   endingLineNumber = "130"
-                  offsetFromSymbolStart = "10">
+                  offsetFromSymbolStart = "20">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -407,7 +407,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "131"
                   endingLineNumber = "131"
-                  offsetFromSymbolStart = "36">
+                  offsetFromSymbolStart = "32">
                </Location>
                <Location
                   uuid = "125F234B-D220-4C16-989A-81695D333F99 - ad7d51061a88a0be"
@@ -422,7 +422,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "132"
                   endingLineNumber = "132"
-                  offsetFromSymbolStart = "52">
+                  offsetFromSymbolStart = "56">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -472,134 +472,6 @@
             startingLineNumber = "176"
             endingLineNumber = "176"
             landmarkName = "-_stopTelegram"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "7A762E29-A2D4-4078-92B3-76FB3F3C8339"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TelegramLiveCamera/TCMainVC.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
-            landmarkName = "-_onRun"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "0A66C97C-5FA2-401E-A357-5950206BB6C9"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TelegramLiveCamera/TCMainVC.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
-            landmarkName = "-_onRun"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "C3F80C12-A9BC-4030-9481-79DFE3ED26E8"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TelegramLiveCamera/TCMainVC.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "339"
-            endingLineNumber = "339"
-            landmarkName = "-newMessage:senderId:content:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "96AC7DAA-3F59-47AD-85E2-8111795F4A7C"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TelegramLiveCamera/TCMainVC.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "341"
-            endingLineNumber = "341"
-            landmarkName = "-newMessage:senderId:content:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "7C7A9EAE-BFFD-4E11-B4A5-898CD181A633"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TelegramLiveCamera/TCMainVC.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "345"
-            endingLineNumber = "345"
-            landmarkName = "-newMessage:senderId:content:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "66463395-67CD-421F-A841-EB6B75F45565"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TelegramLiveCamera/TCMainVC.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "348"
-            endingLineNumber = "348"
-            landmarkName = "-newMessage:senderId:content:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "ADFFD16B-EAF3-4A45-9C35-4CA35FB5D14A"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TelegramLiveCamera/TCMainVC.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "353"
-            endingLineNumber = "353"
-            landmarkName = "-newMessage:senderId:content:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "32746E1B-56CB-4B53-8388-60C17CB42CFB"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TelegramLiveCamera/TCMainVC.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "172"
-            endingLineNumber = "172"
-            landmarkName = "-liveSession:liveStateDidChange:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -664,38 +536,6 @@
             startingLineNumber = "24"
             endingLineNumber = "24"
             landmarkName = "-settingsViewControllerDidEnd:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "E9B6FF9E-107A-4652-9455-065B9DD23D48"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TelegramLiveCamera/TCMainVC.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
-            landmarkName = "-liveSession:liveStateDidChange:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "0DE0B52A-A422-4E53-BF3E-064D415A597C"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TelegramLiveCamera/TCMainVC.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
-            landmarkName = "-_startLive"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

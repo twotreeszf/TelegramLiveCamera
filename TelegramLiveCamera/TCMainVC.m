@@ -41,6 +41,8 @@
     
     UIBarButtonItem* configButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"config"] style:UIBarButtonItemStylePlain target:self action:@selector(_onConfig)];
     self.navigationItem.rightBarButtonItem = configButton;
+    
+    [self _onRun];
 }
 
 - (void)_onRun {
@@ -59,6 +61,8 @@
         
         _running = YES;
         self.navigationItem.leftBarButtonItem.image = [UIImage imageNamed:@"pause"];
+        
+        DDLogInfo(@"已启动");
     }
     else {
         [self _stopTelegram];
@@ -66,6 +70,8 @@
         
         _running = NO;
         self.navigationItem.leftBarButtonItem.image = [UIImage imageNamed:@"run"];
+        
+        DDLogInfo(@"已停止");
     }
 }
 - (void)_onConfig {
@@ -82,12 +88,12 @@
     LFLiveAudioConfiguration* audio;
     LFLiveVideoConfiguration* video;
     if (HLDevice.currentDevice.deviceModel > HLDeviceModeliPhone6) {
-        audio = [LFLiveAudioConfiguration defaultConfigurationForQuality:LFLiveAudioQuality_VeryHigh];
-        video = [LFLiveVideoConfiguration defaultConfigurationForQuality:LFLiveVideoQuality_High4 outputImageOrientation:UIInterfaceOrientationLandscapeRight];
+        audio = [LFLiveAudioConfiguration defaultConfigurationForQuality:LFLiveAudioQuality_High];
+        video = [LFLiveVideoConfiguration defaultConfigurationForQuality:LFLiveVideoQuality_Very_High outputImageOrientation:UIInterfaceOrientationLandscapeRight];
     }
     else {
         audio = [LFLiveAudioConfiguration defaultConfigurationForQuality:LFLiveAudioQuality_Medium];
-        video = [LFLiveVideoConfiguration defaultConfigurationForQuality:LFLiveVideoQuality_High3 outputImageOrientation:UIInterfaceOrientationLandscapeRight];
+        video = [LFLiveVideoConfiguration defaultConfigurationForQuality:LFLiveVideoQuality_Medium outputImageOrientation:UIInterfaceOrientationLandscapeRight];
     }
     
     
@@ -336,7 +342,7 @@
     }
     else if (_keyChatId == chatId)
     {
-        NSString* command = content;
+        NSString* command = [content lowercaseString];
         if ([command isEqualToString:@"query"]) {
             if (LFLiveStart == _liveSession.state) {
                 replay = [NSString stringWithFormat:@"正在直播，点击观看: %@", TCPreferences.sharedInstance.liveViewUrl];
