@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)authReady;
 - (void)authLoggingOut;
 - (void)getMeUserId:(NSInteger)userId;
-- (void)newMessage:(NSInteger)chatId senderId:(NSInteger)senderId content:(NSString*)content;
+- (void)newMessage:(NSInteger)chatId senderId:(NSInteger)senderId sendTime:(NSInteger)sendTime content:(NSString*)content;
 - (void)error:(NSInteger)code msg:(NSString*)msg;
 
 @end

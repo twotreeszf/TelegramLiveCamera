@@ -222,6 +222,7 @@ auto overloaded(F... f) {
 - (void)_processNewMessage:(td_api::updateNewMessage&)newMessage {
     auto chatId = newMessage.message_->chat_id_;
     auto senderId = newMessage.message_->sender_user_id_;
+    int32_t time = newMessage.message_->date_;
     std::string text;
     if (newMessage.message_->content_->get_id() == td_api::messageText::ID) {
         text = static_cast<td_api::messageText &>(*newMessage.message_->content_).text_->text_;
@@ -229,7 +230,7 @@ auto overloaded(F... f) {
         __weak typeof(self) weakSelf = self;
         dispatch_async(dispatch_get_main_queue(), ^{
             if (weakSelf.delegate)
-                [weakSelf.delegate newMessage:chatId senderId:senderId content:[NSString stringWithUTF8String:text.c_str()]];
+                [weakSelf.delegate newMessage:chatId senderId:senderId sendTime:time content:[NSString stringWithUTF8String:text.c_str()]];
         });
     }
 }

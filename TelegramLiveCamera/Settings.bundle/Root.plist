@@ -70,7 +70,7 @@
 			<key>Title</key>
 			<string>推流地址</string>
 			<key>DefaultValue</key>
-			<string>rtsp://</string>
+			<string>rtmp://</string>
 			<key>Key</key>
 			<string>liveRtmpUrl</string>
 		</dict>

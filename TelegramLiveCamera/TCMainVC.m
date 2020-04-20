@@ -331,11 +331,13 @@
     DDLogInfo(@"[Telegram] 登出成功");
 }
 
-- (void)newMessage:(NSInteger)chatId senderId:(NSInteger)senderId content:(NSString*)content {
+- (void)newMessage:(NSInteger)chatId senderId:(NSInteger)senderId sendTime:(NSInteger)sendTime content:(NSString*)content {
     DDLogInfo(@"[Telegram] 新消息, chatId:%d, sendId:%d, msg:%@", (int32_t)chatId, (int32_t)senderId, content);
     __weak typeof(self) weakSelf = self;
     
     if (senderId == _meUserId)
+        return;
+    if (time(NULL) - sendTime > 5)
         return;
     
     NSString* replay;
