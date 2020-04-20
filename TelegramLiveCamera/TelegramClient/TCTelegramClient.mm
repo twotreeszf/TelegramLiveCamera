@@ -168,6 +168,34 @@ auto overloaded(F... f) {
     });
 }
 
+- (void)sendPhoto:(NSInteger)chatId photoFile:(NSString*)photoFile success:(TCBlock)success {
+    __weak typeof(self) weakSelf = self;
+    dispatch_async(_queue, ^{
+        auto file = td_api::make_object<td_api::inputFileLocal>(photoFile.UTF8String);
+        auto content = td_api::make_object<td_api::inputMessagePhoto>();
+        content->photo_ = std::move(file);
+        
+        content->caption_ = td_api::make_object<td_api::formattedText>();
+        content->caption_->text_ = [photoFile lastPathComponent].UTF8String;
+        
+        UIImage* image = [UIImage imageWithContentsOfFile:photoFile];
+        content->width_ = image.size.width;
+        content->height_ = image.size.height;
+        
+        auto sendPhoto = td_api::make_object<td_api::sendMessage>();
+        sendPhoto->chat_id_ = chatId;
+        sendPhoto->input_message_content_ = std::move(content);
+        
+        [weakSelf _sendQuery:std::move(sendPhoto) handler:[weakSelf, success](td_api::Object& obj) {
+            if (![weakSelf _checkError:obj failed:nil]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    success();
+                });
+            }
+        }];
+    });
+}
+
 - (void)_poll {
     while (true) {
         auto response = _client->receive(0);

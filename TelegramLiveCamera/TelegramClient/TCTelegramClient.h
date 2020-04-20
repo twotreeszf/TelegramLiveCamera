@@ -39,6 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)logout;
 - (void)sendMessage:(NSInteger)chatId message:(NSString*)message success:(TCBlock)success;
+- (void)sendPhoto:(NSInteger)chatId photoFile:(NSString*)photoFile success:(TCBlock)success;
 
 @end
 

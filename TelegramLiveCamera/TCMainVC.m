@@ -14,13 +14,14 @@
 #import "TCSettingsVC.h"
 #import "HLDevice/HLDevice.h"
 
-@interface TCMainVC () <LFLiveSessionDelegate, TCTelegramClientDelegate>
+@interface TCMainVC () <LFLiveSessionDelegate, TCTelegramClientDelegate, AVCapturePhotoCaptureDelegate>
 
 @property(nonatomic, readwrite, strong) LFLiveSession* liveSession;
 @property(nonatomic, readwrite, strong) TCTelegramClient* telegram;
 @property(nonatomic, readwrite, assign) BOOL running;
 @property(nonatomic, readwrite, assign) NSInteger keyChatId;
 @property(nonatomic, readwrite, assign) NSInteger meUserId;
+@property(nonatomic, readwrite, strong) AVCaptureSession* photoSession;
 
 @end
 
@@ -61,6 +62,7 @@
         
         _running = YES;
         self.navigationItem.leftBarButtonItem.image = [UIImage imageNamed:@"pause"];
+        [[UIForLumberjack sharedInstance] clearLog];
         
         DDLogInfo(@"已启动");
     }
@@ -87,15 +89,23 @@
 - (void)_startLive {
     LFLiveAudioConfiguration* audio;
     LFLiveVideoConfiguration* video;
+    
+    UIInterfaceOrientation orientation;
+    if (!UIDeviceOrientationIsFlat([UIDevice currentDevice].orientation)) {
+        orientation = (UIInterfaceOrientation)[UIDevice currentDevice].orientation;
+    }
+    else {
+        orientation = UIInterfaceOrientationLandscapeRight;
+    }
+
     if (HLDevice.currentDevice.deviceModel > HLDeviceModeliPhone6) {
         audio = [LFLiveAudioConfiguration defaultConfigurationForQuality:LFLiveAudioQuality_High];
-        video = [LFLiveVideoConfiguration defaultConfigurationForQuality:LFLiveVideoQuality_Very_High outputImageOrientation:UIInterfaceOrientationLandscapeRight];
+        video = [LFLiveVideoConfiguration defaultConfigurationForQuality:LFLiveVideoQuality_Very_High outputImageOrientation:orientation];
     }
     else {
         audio = [LFLiveAudioConfiguration defaultConfigurationForQuality:LFLiveAudioQuality_Medium];
-        video = [LFLiveVideoConfiguration defaultConfigurationForQuality:LFLiveVideoQuality_Medium outputImageOrientation:UIInterfaceOrientationLandscapeRight];
+        video = [LFLiveVideoConfiguration defaultConfigurationForQuality:LFLiveVideoQuality_Medium outputImageOrientation:orientation];
     }
-    
     
     _liveSession = [[LFLiveSession alloc] initWithAudioConfiguration:audio videoConfiguration:video];
     _liveSession.captureDevicePosition = AVCaptureDevicePositionBack;
@@ -192,22 +202,22 @@
     NSString* errorMsg;
     switch (errorCode) {
         case LFLiveSocketError_PreView:
-            errorMsg = [NSString stringWithFormat:@"[推流] 错误:%ld, Preview failed", errorCode];
+            errorMsg = [NSString stringWithFormat:@"[推流] 错误:%d, Preview failed", (int32_t)errorCode];
             break;
             
         case LFLiveSocketError_GetStreamInfo:
-            errorMsg = [NSString stringWithFormat:@"[推流] 错误:%ld, Get stream info failed", errorCode];
+            errorMsg = [NSString stringWithFormat:@"[推流] 错误:%d, Get stream info failed", (int32_t)errorCode];
             break;
         case LFLiveSocketError_ConnectSocket:
-            errorMsg = [NSString stringWithFormat:@"[推流] 错误:%ld, Connect socket failed", errorCode];
+            errorMsg = [NSString stringWithFormat:@"[推流] 错误:%d, Connect socket failed", (int32_t)errorCode];
             break;
             
         case LFLiveSocketError_Verification:
-            errorMsg = [NSString stringWithFormat:@"[推流] 错误:%ld, Verification failed", errorCode];
+            errorMsg = [NSString stringWithFormat:@"[推流] 错误:%d, Verification failed", (int32_t)errorCode];
             break;
         
         case LFLiveSocketError_ReConnectTimeOut:
-            errorMsg = [NSString stringWithFormat:@"[推流] 错误:%ld, Reconnect timeout", errorCode];
+            errorMsg = [NSString stringWithFormat:@"[推流] 错误:%d, Reconnect timeout", (int32_t)errorCode];
             break;
             
         default:
@@ -229,27 +239,27 @@
     NSString* status;
     switch (state) {
         case LFLiveReady:
-            status = [NSString stringWithFormat:@"[推流] 状态:%ld, Ready", state];
+            status = [NSString stringWithFormat:@"[推流] 状态:%d, Ready", (int32_t)state];
             break;
             
         case LFLivePending:
-            status = [NSString stringWithFormat:@"[推流] 状态:%ld, Pending", state];
+            status = [NSString stringWithFormat:@"[推流] 状态:%d, Pending", (int32_t)state];
             break;
             
         case LFLiveStart:
-            status = [NSString stringWithFormat:@"[推流] 状态:%ld, Start", state];
+            status = [NSString stringWithFormat:@"[推流] 状态:%d, Start", (int32_t)state];
             break;
             
         case LFLiveStop:
-            status = [NSString stringWithFormat:@"[推流] 状态:%ld, Stop", state];
+            status = [NSString stringWithFormat:@"[推流] 状态:%d, Stop", (int32_t)state];
             break;
             
         case LFLiveError:
-            status = [NSString stringWithFormat:@"[推流] 状态:%ld, Error", state];
+            status = [NSString stringWithFormat:@"[推流] 状态:%d, Error", (int32_t)state];
             break;
             
         case LFLiveRefresh:
-            status = [NSString stringWithFormat:@"[推流] 状态:%ld, Refresh", state];
+            status = [NSString stringWithFormat:@"[推流] 状态:%d, Refresh", (int32_t)state];
             break;
             
         default:
@@ -322,7 +332,8 @@
 }
 
 - (void)newMessage:(NSInteger)chatId senderId:(NSInteger)senderId content:(NSString*)content {
-    DDLogInfo(@"[Telegram] 新消息, chatId:%ld, sendId:%ld, msg:%@", chatId, senderId, content);
+    DDLogInfo(@"[Telegram] 新消息, chatId:%d, sendId:%d, msg:%@", (int32_t)chatId, (int32_t)senderId, content);
+    __weak typeof(self) weakSelf = self;
     
     if (senderId == _meUserId)
         return;
@@ -334,7 +345,8 @@
         [暗号] ->对接暗号\n\
         query ->查询当前状态\n\
         start ->开始直播推流\n\
-        stop ->停止直播推流\n";
+        stop ->停止直播推流\n\
+        photo ->拍摄照片\n";
     }
     else if ([content isEqualToString:TCPreferences.sharedInstance.telegramMessageTag]){
         _keyChatId = chatId;
@@ -351,13 +363,31 @@
                 replay = [self _liveStatus2Msg:_liveSession.state];
         }
         else if ([command isEqualToString:@"start"]) {
-            replay = @"收到，开始直播";
-            [self _stopLive];
-            [self _startLive];
+            if (weakSelf.photoSession.isRunning) {
+                replay = @"稍等，正在拍照";
+            }
+            else {
+                replay = @"收到，开始直播";
+                [self _stopLive];
+                [self _startLive];
+            }
         }
         else if ([command isEqualToString:@"stop"]) {
             replay = @"收到，停止直播";
             [self _stopLive];
+        }
+        else if ([command isEqualToString:@"photo"]) {
+            if (_liveSession.state != LFLiveReady) {
+                replay = @"正在直播，请先停止直播后再试";
+            }
+            else {
+                if (weakSelf.photoSession.isRunning) {
+                    replay = @"稍等，正在拍照";
+                }
+                else {
+                    [self _takePhoto];
+                }
+            }
         }
     }
     
@@ -370,6 +400,62 @@
 
 - (void)error:(NSInteger)code msg:(NSString*)msg {
     
+}
+
+- (void)_takePhoto {
+    _photoSession = [[AVCaptureSession alloc]init];
+    [_photoSession setSessionPreset:AVCaptureSessionPresetHigh];
+    _photoSession.sessionPreset = AVCaptureSessionPresetPhoto;
+    AVCaptureDevice *captureDevice =[AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+
+    NSError *error = nil;
+    AVCaptureDeviceInput *input =   [AVCaptureDeviceInput deviceInputWithDevice:captureDevice error:&error];
+    if (error)
+        return;
+    [_photoSession addInput:input];
+    
+    AVCapturePhotoOutput *imageOutput = [AVCapturePhotoOutput new];
+    imageOutput.highResolutionCaptureEnabled = YES;
+    AVCapturePhotoSettings* outputSettings = [AVCapturePhotoSettings photoSettings];
+    outputSettings.highResolutionPhotoEnabled = YES;
+    [_photoSession addOutput:imageOutput];
+    
+    UIDeviceOrientation deviceOrientation =  [UIDevice currentDevice].orientation;
+    if (!UIDeviceOrientationIsFlat(deviceOrientation)) {
+        [imageOutput connectionWithMediaType:AVMediaTypeVideo].videoOrientation = (AVCaptureVideoOrientation)deviceOrientation;
+    }
+        
+    [_photoSession startRunning];
+    [imageOutput capturePhotoWithSettings:outputSettings delegate:self];
+}
+
+- (void)captureOutput:(AVCapturePhotoOutput *)captureOutput
+didFinishProcessingPhotoSampleBuffer:(nullable CMSampleBufferRef)photoSampleBuffer
+previewPhotoSampleBuffer:(nullable CMSampleBufferRef)previewPhotoSampleBuffer
+     resolvedSettings:(AVCaptureResolvedPhotoSettings *)resolvedSettings
+      bracketSettings:(nullable AVCaptureBracketedStillImageSettings *)bracketSettings
+                error:(nullable NSError *)error {
+    
+    NSData *data = [AVCapturePhotoOutput JPEGPhotoDataRepresentationForJPEGSampleBuffer:photoSampleBuffer previewPhotoSampleBuffer:previewPhotoSampleBuffer];
+    
+    __weak typeof(self) weakSelf = self;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss zzz"];
+        NSString *currentDateString = [dateFormatter stringFromDate:[NSDate date]];
+        
+        NSString* filePath = [NSTemporaryDirectory() stringByAppendingPathComponent:currentDateString];
+        [data writeToFile:filePath atomically:YES];
+                
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [weakSelf.photoSession stopRunning];
+            weakSelf.photoSession = nil;
+            
+            [weakSelf.telegram sendPhoto:weakSelf.keyChatId photoFile:filePath success:^{
+                DDLogDebug(@"[telegram] 照片发送成功");
+            }];
+        });
+    });
 }
 
 @end

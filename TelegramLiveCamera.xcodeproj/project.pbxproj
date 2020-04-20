@@ -817,12 +817,12 @@
 		E872912F24499FB200DEFCBC /* publish */ = {
 			isa = PBXGroup;
 			children = (
+				E872913424499FB200DEFCBC /* LFStreamSocket.h */,
 				E872913024499FB200DEFCBC /* LFStreamRTMPSocket.h */,
+				E872913324499FB200DEFCBC /* LFStreamRtmpSocket.m */,
+				E872913524499FB200DEFCBC /* NSMutableArray+LFAdd.h */,
 				E872913124499FB200DEFCBC /* NSMutableArray+LFAdd.m */,
 				E872913224499FB200DEFCBC /* LFStreamingBuffer.h */,
-				E872913324499FB200DEFCBC /* LFStreamRtmpSocket.m */,
-				E872913424499FB200DEFCBC /* LFStreamSocket.h */,
-				E872913524499FB200DEFCBC /* NSMutableArray+LFAdd.h */,
 				E872913624499FB200DEFCBC /* LFStreamingBuffer.m */,
 			);
 			path = publish;
@@ -842,15 +842,15 @@
 		E872913D24499FB200DEFCBC /* coder */ = {
 			isa = PBXGroup;
 			children = (
-				E872913E24499FB200DEFCBC /* LFAudioEncoding.h */,
-				E872913F24499FB200DEFCBC /* LFH264VideoEncoder.h */,
-				E872914024499FB200DEFCBC /* LFHardwareAudioEncoder.m */,
-				E872914124499FB200DEFCBC /* LFH264VideoEncoder.mm */,
 				E872914224499FB200DEFCBC /* H264 */,
-				E872914B24499FB200DEFCBC /* LFHardwareVideoEncoder.h */,
 				E872914C24499FB200DEFCBC /* LFVideoEncoding.h */,
-				E872914D24499FB200DEFCBC /* LFHardwareAudioEncoder.h */,
+				E872913F24499FB200DEFCBC /* LFH264VideoEncoder.h */,
+				E872914124499FB200DEFCBC /* LFH264VideoEncoder.mm */,
+				E872914B24499FB200DEFCBC /* LFHardwareVideoEncoder.h */,
 				E872914E24499FB200DEFCBC /* LFHardwareVideoEncoder.m */,
+				E872913E24499FB200DEFCBC /* LFAudioEncoding.h */,
+				E872914D24499FB200DEFCBC /* LFHardwareAudioEncoder.h */,
+				E872914024499FB200DEFCBC /* LFHardwareAudioEncoder.m */,
 			);
 			path = coder;
 			sourceTree = "<group>";
