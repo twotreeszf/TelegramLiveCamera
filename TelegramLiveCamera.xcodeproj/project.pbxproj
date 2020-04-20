@@ -1370,6 +1370,7 @@
 			buildPhases = (
 				5BC52E351950399BFFBABC42 /* [CP] Check Pods Manifest.lock */,
 				E8AC68592446E8A800ACEF40 /* Sources */,
+				E8514155244DA51C006B0DC6 /* Set Build No */,
 				E8AC685A2446E8A800ACEF40 /* Frameworks */,
 				E8AC685B2446E8A800ACEF40 /* Resources */,
 				BDB47EBB2EE0B15D15A86FF9 /* [CP] Embed Pods Frameworks */,
@@ -1492,6 +1493,24 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TelegramLiveCamera/Pods-TelegramLiveCamera-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		E8514155244DA51C006B0DC6 /* Set Build No */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Set Build No";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=$(date +\"%Y%m%d%H%M\")\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1857,6 +1876,7 @@
 			baseConfigurationReference = ACDDEA04483C0FC55D519D00 /* Pods-TelegramLiveCamera.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8PUEFH8BBB;
 				INFOPLIST_FILE = TelegramLiveCamera/Info.plist;
@@ -1870,6 +1890,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.twotrees.TelegramLiveCamera;
 				PRODUCT_NAME = TeleCam;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1879,6 +1900,7 @@
 			baseConfigurationReference = 8E95FE2F284565FB99DD6F74 /* Pods-TelegramLiveCamera.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8PUEFH8BBB;
 				INFOPLIST_FILE = TelegramLiveCamera/Info.plist;
@@ -1892,6 +1914,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.twotrees.TelegramLiveCamera;
 				PRODUCT_NAME = TeleCam;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
