@@ -404,8 +404,7 @@
 
 - (void)_takePhoto {
     _photoSession = [[AVCaptureSession alloc]init];
-    [_photoSession setSessionPreset:AVCaptureSessionPresetHigh];
-    _photoSession.sessionPreset = AVCaptureSessionPresetPhoto;
+    [_photoSession setSessionPreset:AVCaptureSessionPresetPhoto];
     AVCaptureDevice *captureDevice =[AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
 
     NSError *error = nil;
