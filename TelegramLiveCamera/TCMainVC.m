@@ -35,8 +35,6 @@
     [DDLog addLogger:[UIForLumberjack sharedInstance]];
     [[UIForLumberjack sharedInstance] showLogInView:self.view];
     
-    [UIApplication sharedApplication].idleTimerDisabled = YES;
-    
     UIBarButtonItem* runButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"run"] style:UIBarButtonItemStylePlain target:self action:@selector(_onRun)];
     self.navigationItem.leftBarButtonItem = runButton;
     
@@ -44,6 +42,10 @@
     self.navigationItem.rightBarButtonItem = configButton;
     
     [self _onRun];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
 }
 
 - (void)_onRun {

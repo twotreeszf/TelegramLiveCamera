@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -211,6 +211,8 @@
 		E872938824499FB400DEFCBC /* error.c in Sources */ = {isa = PBXBuildFile; fileRef = E87292BA24499FB300DEFCBC /* error.c */; };
 		E872938924499FB400DEFCBC /* parseurl.c in Sources */ = {isa = PBXBuildFile; fileRef = E87292BD24499FB300DEFCBC /* parseurl.c */; };
 		E872938A24499FB400DEFCBC /* amf.c in Sources */ = {isa = PBXBuildFile; fileRef = E87292BE24499FB300DEFCBC /* amf.c */; };
+		E8A7708E245712BB0093D21A /* TCScanQRVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E8A7708D245712BB0093D21A /* TCScanQRVC.m */; };
+		E8A7709124571D270093D21A /* TCExportQRVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E8A7709024571D270093D21A /* TCExportQRVC.m */; };
 		E8AC68622446E8A800ACEF40 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E8AC68612446E8A800ACEF40 /* AppDelegate.m */; };
 		E8AC68682446E8A800ACEF40 /* TCMainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E8AC68672446E8A800ACEF40 /* TCMainVC.m */; };
 		E8AC686D2446E8AB00ACEF40 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8AC686C2446E8AB00ACEF40 /* Assets.xcassets */; };
@@ -650,6 +652,10 @@
 		E87292BD24499FB300DEFCBC /* parseurl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = parseurl.c; sourceTree = "<group>"; };
 		E87292BE24499FB300DEFCBC /* amf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amf.c; sourceTree = "<group>"; };
 		E87292BF24499FB300DEFCBC /* rtmp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtmp.h; sourceTree = "<group>"; };
+		E8A7708C245712BB0093D21A /* TCScanQRVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TCScanQRVC.h; sourceTree = "<group>"; };
+		E8A7708D245712BB0093D21A /* TCScanQRVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TCScanQRVC.m; sourceTree = "<group>"; };
+		E8A7708F24571D270093D21A /* TCExportQRVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TCExportQRVC.h; sourceTree = "<group>"; };
+		E8A7709024571D270093D21A /* TCExportQRVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TCExportQRVC.m; sourceTree = "<group>"; };
 		E8AC685D2446E8A800ACEF40 /* TeleCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeleCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8AC68602446E8A800ACEF40 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E8AC68612446E8A800ACEF40 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -1301,6 +1307,10 @@
 				E8AC68672446E8A800ACEF40 /* TCMainVC.m */,
 				E87291102449917000DEFCBC /* TCSettingsVC.h */,
 				E87291112449917000DEFCBC /* TCSettingsVC.m */,
+				E8A7708C245712BB0093D21A /* TCScanQRVC.h */,
+				E8A7708D245712BB0093D21A /* TCScanQRVC.m */,
+				E8A7708F24571D270093D21A /* TCExportQRVC.h */,
+				E8A7709024571D270093D21A /* TCExportQRVC.m */,
 				E8AC686C2446E8AB00ACEF40 /* Assets.xcassets */,
 				E8AC686E2446E8AB00ACEF40 /* LaunchScreen.storyboard */,
 				E8AC68712446E8AB00ACEF40 /* Info.plist */,
@@ -1373,7 +1383,6 @@
 				E8514155244DA51C006B0DC6 /* Set Build No */,
 				E8AC685A2446E8A800ACEF40 /* Frameworks */,
 				E8AC685B2446E8A800ACEF40 /* Resources */,
-				BDB47EBB2EE0B15D15A86FF9 /* [CP] Embed Pods Frameworks */,
 				65F2EFDC44CAC3EEC45FE73B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -1459,39 +1468,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TelegramLiveCamera/Pods-TelegramLiveCamera-resources.sh",
-				$PODS_CONFIGURATION_BUILD_DIR/InAppSettingsKit/InAppSettingsKit.bundle,
+				"${PODS_ROOT}/Target Support Files/Pods-TelegramLiveCamera/Pods-TelegramLiveCamera-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${PODS_ROOT}/Target Support Files/Pods-TelegramLiveCamera/Pods-TelegramLiveCamera-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TelegramLiveCamera/Pods-TelegramLiveCamera-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BDB47EBB2EE0B15D15A86FF9 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TelegramLiveCamera/Pods-TelegramLiveCamera-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TelegramLiveCamera/Pods-TelegramLiveCamera-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E8514155244DA51C006B0DC6 /* Set Build No */ = {
@@ -1534,6 +1519,7 @@
 				E872932E24499FB400DEFCBC /* GPUImageBoxBlurFilter.m in Sources */,
 				E87292DC24499FB300DEFCBC /* GPUImageThresholdEdgeDetectionFilter.m in Sources */,
 				E872931A24499FB400DEFCBC /* GPUImage3x3TextureSamplingFilter.m in Sources */,
+				E8A7708E245712BB0093D21A /* TCScanQRVC.m in Sources */,
 				E872935A24499FB400DEFCBC /* GPUImageHoughTransformLineDetector.m in Sources */,
 				E872932724499FB400DEFCBC /* GPUImageAverageLuminanceThresholdFilter.m in Sources */,
 				E87292C924499FB300DEFCBC /* LFFrame.m in Sources */,
@@ -1571,6 +1557,7 @@
 				E872932924499FB400DEFCBC /* GPUImageFilterPipeline.m in Sources */,
 				E87292CF24499FB300DEFCBC /* LFGPUImageBeautyFilter.m in Sources */,
 				E872931224499FB400DEFCBC /* GPUImageErosionFilter.m in Sources */,
+				E8A7709124571D270093D21A /* TCExportQRVC.m in Sources */,
 				E872935F24499FB400DEFCBC /* GPUImageMedianFilter.m in Sources */,
 				E87292E024499FB300DEFCBC /* GPUImageFourInputFilter.m in Sources */,
 				E872931024499FB400DEFCBC /* GPUImageAdaptiveThresholdFilter.m in Sources */,

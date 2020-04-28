@@ -17,4 +17,6 @@ typedef void (^TCBlock)();
 typedef void (^TCStringBlock)(NSString* param);
 typedef void (^TCFailedBlock)(NSInteger code, NSString* message);
 
+#define PROPERTY_NAME(name) NSStringFromSelector(@selector(name))
+
 #endif

@@ -7,6 +7,10 @@
 //
 
 #import "TCSettingsVC.h"
+#import "TCExportQRVC.h"
+#import <ZXingObjC/ZXingObjC.h>
+#import "TCPreferences.h"
+#import "TCScanQRVC.h"
 
 @implementation TCSettingsVC
 
@@ -18,6 +22,38 @@
     
     [super viewDidLoad];
     self.delegate = self;
+    
+    UIBarButtonItem* exportButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"export"] style:UIBarButtonItemStylePlain target:self action:@selector(_onExport)];
+    UIBarButtonItem* scanButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"scan"] style:UIBarButtonItemStylePlain target:self action:@selector(_onScan)];
+    
+    self.navigationItem.rightBarButtonItems = @[scanButton, exportButton];
+}
+
+- (void)_onExport {
+    CGFloat width = self.view.bounds.size.width * 2;
+    NSString* json = [TCPreferences.sharedInstance exportJson];
+    NSString* base64 = [[json dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:0];
+
+    NSError *error = nil;
+    ZXMultiFormatWriter *writer = [ZXMultiFormatWriter writer];
+    ZXEncodeHints* hints = [ZXEncodeHints hints];
+    hints.errorCorrectionLevel = [ZXQRCodeErrorCorrectionLevel errorCorrectionLevelH];
+    ZXBitMatrix* result = [writer encode:base64 format:kBarcodeFormatQRCode width:width height:width hints:hints error:&error];
+    if (result) {
+        CGImageRef image = [[ZXImage imageWithMatrix:result] cgimage];
+        UIImage* qrCode = [UIImage imageWithCGImage:image];
+        TCExportQRVC* export = [TCExportQRVC new];
+        export.image = qrCode;
+        [self.navigationController pushViewController:export animated:YES];
+    }
+    else {
+        DDLogError(@"%@", error);
+    }
+}
+
+- (void)_onScan {
+    TCScanQRVC* scan = [TCScanQRVC new];
+    [self.navigationController pushViewController:scan animated:YES];
 }
 
 - (void)settingsViewControllerDidEnd:(IASKAppSettingsViewController*)sender {
